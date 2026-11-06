@@ -1,0 +1,388 @@
+{
+    "name":  "FpvDemoInputActions",
+    "maps":  [
+                 {
+                     "name":  "Drone",
+                     "id":  "626a5f2a-77a4-407a-b83a-a385f70c4fae",
+                     "actions":  [
+                                     {
+                                         "name":  "Roll",
+                                         "type":  "Value",
+                                         "id":  "b2812d27-21ac-4ee9-917d-dd1764bd420d",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "Pitch",
+                                         "type":  "Value",
+                                         "id":  "8982e87c-a879-4d75-85dc-c92e9950d6ee",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "Yaw",
+                                         "type":  "Value",
+                                         "id":  "c09b5a23-81a4-4f37-9d6d-0e030550e550",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "Throttle",
+                                         "type":  "Value",
+                                         "id":  "c1e0adfe-bc67-44fa-ae7c-8fa7fa454d41",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "Arm",
+                                         "type":  "Value",
+                                         "id":  "816d45eb-8f75-4f7d-b2fa-2b0c60e05f40",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "FlightMode",
+                                         "type":  "Value",
+                                         "id":  "80196a8c-b6dc-483f-b189-3d636361da33",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     }
+                                 ],
+                     "bindings":  [
+                                      {
+                                          "name":  "",
+                                          "id":  "06cd8d03-c552-4021-b288-2b0c0b1859a3",
+                                          "path":  "\u003cJoystick\u003e/stick/x",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Roll",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "d05c087d-4713-422c-b1fc-aa78d95fed8c",
+                                          "path":  "\u003cJoystick\u003e/stick/y",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Pitch",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "3bf21d3c-fe36-442a-9be9-99a543cb54ca",
+                                          "path":  "\u003cJoystick\u003e/rx",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Yaw",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "d6ac4061-1dc1-4bb0-be92-6cb68d9f7f5e",
+                                          "path":  "\u003cJoystick\u003e/z",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Throttle",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "79365c21-6f32-4be5-9a05-2ed715e27d90",
+                                          "path":  "\u003cJoystick\u003e/ry",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Arm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "bda4df7f-85eb-4cc6-b388-5ed5d1db9ed2",
+                                          "path":  "\u003cJoystick\u003e/slider1",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "FlightMode",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "687c292e-431f-40d5-b919-006370e29284",
+                                          "path":  "\u003cGamepad\u003e/rightStick/x",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Roll",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "8d0cd72e-1fa0-4eba-938a-da5bddf29eab",
+                                          "path":  "\u003cGamepad\u003e/rightStick/y",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Pitch",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "f5d98a0f-7ed4-4458-a069-3d2484000109",
+                                          "path":  "\u003cGamepad\u003e/leftStick/x",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Yaw",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "984ca381-a3c5-4a98-a489-bb8c36bd86e9",
+                                          "path":  "\u003cGamepad\u003e/leftStick/y",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Throttle",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "6958ce2c-127f-46c7-80da-6abd8b7b780f",
+                                          "path":  "\u003cGamepad\u003e/buttonNorth",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Arm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "58a29a7d-7096-45e6-bf29-a5b2e1f6407d",
+                                          "path":  "\u003cGamepad\u003e/buttonWest",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "FlightMode",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "1D Axis",
+                                          "id":  "a3ced223-5b8d-4776-a583-bb32074e181b",
+                                          "path":  "1DAxis",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Roll",
+                                          "isComposite":  true,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "negative",
+                                          "id":  "013e9fe0-94f8-48e7-826a-8e03d9d7f104",
+                                          "path":  "\u003cKeyboard\u003e/leftArrow",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Roll",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "positive",
+                                          "id":  "7d57eef2-4624-4d20-9339-36820edd6173",
+                                          "path":  "\u003cKeyboard\u003e/rightArrow",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Roll",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "1D Axis",
+                                          "id":  "bc892c99-7c00-4748-b610-bcf5f284614d",
+                                          "path":  "1DAxis",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Pitch",
+                                          "isComposite":  true,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "negative",
+                                          "id":  "1601c067-0c4b-448d-9ded-33f3798a7bcb",
+                                          "path":  "\u003cKeyboard\u003e/downArrow",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Pitch",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "positive",
+                                          "id":  "424b0230-8fa9-4529-afe7-5afd3c0df859",
+                                          "path":  "\u003cKeyboard\u003e/upArrow",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Pitch",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "1D Axis",
+                                          "id":  "333d0f2c-10db-4508-9fa5-29e881386228",
+                                          "path":  "1DAxis",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Yaw",
+                                          "isComposite":  true,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "negative",
+                                          "id":  "c0e46909-afa4-4fe6-9cf2-08f74615f993",
+                                          "path":  "\u003cKeyboard\u003e/a",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Yaw",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "positive",
+                                          "id":  "62277f09-e552-4fad-ba9a-a80c977bdd54",
+                                          "path":  "\u003cKeyboard\u003e/d",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Yaw",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "1D Axis",
+                                          "id":  "85beeedf-f596-4ae5-b881-64951e9ed057",
+                                          "path":  "1DAxis",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Throttle",
+                                          "isComposite":  true,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "negative",
+                                          "id":  "5bb98378-15b9-4dc7-a8fa-e46ae5863f10",
+                                          "path":  "\u003cKeyboard\u003e/s",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Throttle",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "positive",
+                                          "id":  "6670fd66-f9b4-4a1f-9415-2432a06be99e",
+                                          "path":  "\u003cKeyboard\u003e/w",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Throttle",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  true
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "e45eab44-f552-4008-869d-f6c18e4e267d",
+                                          "path":  "\u003cKeyboard\u003e/x",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Arm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "491610eb-5ce0-4684-9dbc-80526ccaa267",
+                                          "path":  "\u003cKeyboard\u003e/m",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "FlightMode",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      }
+                                  ]
+                 }
+             ],
+    "controlSchemes":  [
+                           {
+                               "name":  "Keyboard\u0026Mouse",
+                               "bindingGroup":  "Keyboard\u0026Mouse",
+                               "devices":  [
+                                               {
+                                                   "devicePath":  "\u003cKeyboard\u003e",
+                                                   "isOptional":  false,
+                                                   "isOR":  false
+                                               }
+                                           ]
+                           },
+                           {
+                               "name":  "Gamepad",
+                               "bindingGroup":  "Gamepad",
+                               "devices":  [
+                                               {
+                                                   "devicePath":  "\u003cGamepad\u003e",
+                                                   "isOptional":  false,
+                                                   "isOR":  false
+                                               }
+                                           ]
+                           },
+                           {
+                               "name":  "Joystick",
+                               "bindingGroup":  "Joystick",
+                               "devices":  [
+                                               {
+                                                   "devicePath":  "\u003cJoystick\u003e",
+                                                   "isOptional":  false,
+                                                   "isOR":  false
+                                               }
+                                           ]
+                           }
+                       ]
+}

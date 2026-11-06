@@ -1,0 +1,17 @@
+{
+    "name": "UForce.FpvFlight.RadioInput",
+    "rootNamespace": "UForce.FpvFlight.RadioInput",
+    "references": [
+        "UForce.FpvFlight",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

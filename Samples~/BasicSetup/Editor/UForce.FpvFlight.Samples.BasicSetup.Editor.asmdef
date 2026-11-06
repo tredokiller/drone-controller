@@ -1,0 +1,21 @@
+{
+    "name": "UForce.FpvFlight.Samples.BasicSetup.Editor",
+    "rootNamespace": "UForce.FpvFlight.Samples.Editor",
+    "references": [
+        "UForce.FpvFlight",
+        "UForce.FpvFlight.RadioInput",
+        "UForce.FpvFlight.Samples.BasicSetup",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

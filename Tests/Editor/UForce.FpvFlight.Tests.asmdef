@@ -1,0 +1,26 @@
+{
+    "name": "UForce.FpvFlight.Tests",
+    "rootNamespace": "UForce.FpvFlight.Tests",
+    "references": [
+        "UForce.FpvFlight",
+        "UForce.FpvFlight.RadioInput",
+        "Unity.InputSystem",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
