@@ -15,7 +15,8 @@
     "autoReferenced": true,
     "defineConstraints": [
         "UFORCE_FPV_GEOWORLD",
-        "ENVIRO_3"
+        "ENVIRO_3",
+        "ODIN_INSPECTOR"
     ],
     "versionDefines": [
         {
