@@ -30,7 +30,7 @@ MonoBehaviour:
       _max: 1
       _isCentered: 1
       _isInverted: 0
-      _deadzone: 0.02
+      _deadzone: 0.05
     _pitch:
       _controlPath:
       _min: -1
@@ -38,7 +38,7 @@ MonoBehaviour:
       _max: 1
       _isCentered: 1
       _isInverted: 1
-      _deadzone: 0.02
+      _deadzone: 0.05
     _roll:
       _controlPath:
       _min: -1
@@ -46,8 +46,8 @@ MonoBehaviour:
       _max: 1
       _isCentered: 1
       _isInverted: 0
-      _deadzone: 0.02
-    _throttleLowDeadzone: 0.03
+      _deadzone: 0.05
+    _throttleLowDeadzone: 0.02
     _arm:
       _controlPath:
       _restValue: 1
@@ -60,12 +60,33 @@ MonoBehaviour:
       _activeValue: 1
       _isLatching: 1
     _modeAtRest: 1
-    _modeAtMiddle: 0
+    _modeAtMiddle: 2
     _modeAtActive: 0
+    _payloadArm:
+      _controlPath:
+      _restValue: -1
+      _activeValue: 1
+      _isLatching: 1
+    _payloadArmActivePosition: 2
+    _payloadDetonate:
+      _controlPath:
+      _restValue: 0
+      _activeValue: 1
+      _isLatching: 0
+    _cameraTilt:
+      _controlPath:
+      _restValue: -1
+      _activeValue: 1
+      _isLatching: 1
+    _thermal:
+      _controlPath:
+      _restValue: 0
+      _activeValue: 1
+      _isLatching: 0
   _debugInput:
     _keyboardStickAcceleration: 3
     _keyboardStickReturnSpeed: 4.5
-    _throttleSpeed: 0.5
-    _gamepadDeadzone: 0.08
-    _gamepadExponent: 0.5
-    _defaultMode: 1
+    _gamepadDeadzone: 0.1
+    _gamepadExponent: 0.8
+    _armThrottleMax: 0.05
+    _defaultMode: 0

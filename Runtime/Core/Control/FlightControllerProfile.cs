@@ -22,6 +22,12 @@ namespace UForce.FpvFlight.Control
 		[Tooltip("Rotation rate per unit of tilt error, 1/s (Betaflight angle_p_gain 50 = 5).")]
 		[SerializeField, Min(0.1f)] private float _angleStrength = 5f;
 
+		[Header("Horizon mode")]
+		[Tooltip("Pull towards level at centre stick, 1/s. Same units as the angle strength.")]
+		[SerializeField, Min(0f)] private float _horizonLevelStrength = 5f;
+		[Tooltip("Stick deflection at which levelling has faded out completely (Betaflight horizon_transition).")]
+		[SerializeField, Range(0.1f, 1f)] private float _horizonTransition = 0.75f;
+
 		[Header("Throttle")]
 		[SerializeField, Range(0f, 1f)] private float _throttleMid = 0.5f;
 		[SerializeField, Range(0f, 1f)] private float _throttleExpo;
@@ -43,6 +49,8 @@ namespace UForce.FpvFlight.Control
 		public float IntegralLimit => _integralLimit;
 		public float AngleLimit => _angleLimit;
 		public float AngleStrength => _angleStrength;
+		public float HorizonLevelStrength => _horizonLevelStrength;
+		public float HorizonTransition => _horizonTransition;
 		public float ThrottleMid => _throttleMid;
 		public float ThrottleExpo => _throttleExpo;
 		public float ArmThrottleMax => _armThrottleMax;
@@ -83,6 +91,12 @@ namespace UForce.FpvFlight.Control
 			_yawResponseTime = Mathf.Max(0.005f, yawResponseTime);
 			_integralTime = Mathf.Max(0f, integralTime);
 			_integralLimit = Mathf.Clamp01(integralLimit);
+		}
+
+		public void ConfigureHorizon(float levelStrength, float transition)
+		{
+			_horizonLevelStrength = Mathf.Max(0f, levelStrength);
+			_horizonTransition = Mathf.Clamp(transition, 0.1f, 1f);
 		}
 
 		public void ConfigureDisturbances(float turbulenceAngularAcceleration)

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc0b59fc64ee4c9598fd624f48464ffd, type: 3}
+  m_Name: FpvVideo_Digital
+  m_EditorClassIdentifier: 
+  _fisheye: 1
+  _vignette: 0.28
+  _key: 0.12
+  _meterCeiling: 4
+  _exposureRange: {x: -2.5, y: 1}
+  _adaptSeconds: {x: 0.35, y: 0.9}
+  _glow: 0.15
+  _sunVeil: 0.3
+  _shadowLift: 0.14
+  _tone: {x: 0.62, y: 0, z: 1.04, w: 1}
+  _isAnalog: 0
+  _analogNoise: 1
+  _chromaBleed: 0.007
+  _softness: 0.6
+  _volumeProfile: {fileID: 11400000, guid: ea3c39524d314a459a9069a1ccff22be, type: 2}
+  _noiseFps: 60

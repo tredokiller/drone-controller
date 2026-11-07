@@ -2,7 +2,7 @@
   "name": "com.uforce.fpv-flight",
   "version": "0.1.0",
   "displayName": "UForce FPV Flight",
-  "description": "Betaflight-like FPV flight core for Unity: acro and angle modes, RC rate / super rate / expo, motor lag, quadratic drag, battery sag, a wind interface, a radio link interface with Betaflight failsafe, and Radiomaster TX12 input with calibration. No Mirror, Zenject, HUD or UI dependencies.",
+  "description": "Betaflight-like FPV flight core for Unity with the Interceptor Drones kit: acro, angle and horizon modes, Betaflight rates, motor lag, drag, battery sag, wind, a radio link interface with failsafe, Radiomaster TX12 input with every channel and a calibration wizard, FPV video and OSD, motor sound and onboard microphone, rotor wash, camera tilt, crash detection, and drone types (strike FPV and four interceptors) with models. The flight core has no Mirror, Zenject, HUD or UI dependencies.",
   "unity": "6000.3",
   "author": {
     "name": "UForce"
@@ -16,18 +16,16 @@
   ],
   "dependencies": {
     "com.unity.inputsystem": "1.18.0",
-    "com.unity.modules.physics": "1.0.0"
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.terrain": "1.0.0"
   },
   "samples": [
     {
       "displayName": "Basic Setup",
-      "description": "Demo input actions (TX12, gamepad, keyboard), default profiles, a demo flight driver, a telemetry overlay and a demo scene builder.",
+      "description": "Demo input actions with every radio channel, default profiles, a demo driver that spawns the drone types, a telemetry overlay and a demo scene builder.",
       "path": "Samples~/BasicSetup"
-    },
-    {
-      "displayName": "Airframe Presets",
-      "description": "Drone type presets: a strike FPV and two interceptors, each as airframe, battery and rates assets.",
-      "path": "Samples~/AirframePresets"
     }
   ]
 }

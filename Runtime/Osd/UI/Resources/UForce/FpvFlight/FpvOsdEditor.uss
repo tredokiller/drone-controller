@@ -1,0 +1,182 @@
+/* OSD editor of the FPV flight package (FpvOsdEditorScreen), after the OSD editor of FPV Defence Simulator. */
+.fpv-osd-editor-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 24px;
+    flex-direction: row;
+    background-color: rgb(5, 16, 18);
+}
+
+.fpv-osd-editor-sidebar {
+    width: 440px;
+    min-width: 440px;
+    margin-right: 24px;
+    padding: 18px 20px;
+    flex-direction: column;
+    background-color: rgba(12, 26, 28, 0.96);
+    border-width: 1px;
+    border-color: rgba(124, 151, 145, 0.35);
+    border-radius: 4px;
+}
+
+.fpv-osd-editor-title {
+    margin-bottom: 8px;
+    color: rgb(240, 250, 242);
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+.fpv-osd-editor-row {
+    flex-direction: row;
+    align-items: center;
+    min-height: 48px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(124, 151, 145, 0.18);
+}
+
+.fpv-osd-editor-row-label {
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: rgb(214, 228, 222);
+    font-size: 17px;
+    white-space: normal;
+}
+
+.fpv-osd-editor-row .unity-toggle {
+    margin: 0;
+}
+
+.fpv-osd-editor-row .unity-toggle__checkmark {
+    width: 22px;
+    height: 22px;
+    border-color: rgba(124, 151, 145, 0.7);
+    background-color: rgb(8, 18, 20);
+}
+
+.fpv-osd-editor-row .unity-toggle:checked .unity-toggle__checkmark {
+    border-color: rgb(112, 224, 145);
+    -unity-background-image-tint-color: rgb(112, 224, 145);
+}
+
+.fpv-osd-editor-slider {
+    flex-grow: 1;
+    margin: 0 14px;
+}
+
+.fpv-osd-editor-number {
+    width: 64px;
+    color: rgb(112, 224, 145);
+    font-size: 16px;
+    -unity-text-align: middle-right;
+    -unity-font-style: bold;
+}
+
+.fpv-osd-editor-modes {
+    flex-direction: row;
+    margin: 10px 0 6px;
+}
+
+.fpv-osd-editor-mode {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 40px;
+    margin: 0;
+    border-width: 1px;
+    border-radius: 0;
+    border-color: rgba(124, 151, 145, 0.45);
+    background-color: rgb(8, 18, 20);
+    color: rgb(184, 196, 197);
+    font-size: 15px;
+    -unity-font-style: bold;
+}
+
+.fpv-osd-editor-mode:hover {
+    color: rgb(240, 250, 242);
+}
+
+.fpv-osd-editor-mode.is-selected {
+    border-color: rgb(112, 224, 145);
+    background-color: rgb(24, 37, 26);
+    color: rgb(166, 240, 95);
+}
+
+.fpv-osd-editor-group {
+    margin-top: 14px;
+    margin-bottom: 2px;
+    color: rgb(130, 145, 150);
+    font-size: 14px;
+    -unity-font-style: bold;
+    letter-spacing: 2px;
+}
+
+.fpv-osd-editor-elements {
+    flex-grow: 1;
+    min-height: 0;
+    margin-top: 6px;
+}
+
+.fpv-osd-editor-actions {
+    flex-shrink: 0;
+    flex-direction: row;
+    padding-top: 12px;
+    border-top-width: 1px;
+    border-top-color: rgba(124, 151, 145, 0.35);
+}
+
+.fpv-osd-editor-button {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 46px;
+    margin: 0 0 0 10px;
+    border-width: 1px;
+    border-radius: 4px;
+    border-color: rgba(124, 151, 145, 0.6);
+    background-color: rgb(21, 31, 34);
+    color: rgb(215, 226, 226);
+    font-size: 15px;
+    -unity-font-style: bold;
+}
+
+/* The primary button comes first in the row. */
+.fpv-osd-editor-button.is-primary {
+    margin-left: 0;
+    border-color: rgb(166, 240, 95);
+    background-color: rgb(166, 240, 95);
+    color: rgb(11, 18, 9);
+}
+
+.fpv-osd-editor-viewport {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    background-color: rgb(8, 15, 16);
+}
+
+.fpv-osd-editor-screen {
+    position: absolute;
+}
+
+.fpv-osd-editor-frame {
+    position: absolute;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: rgba(112, 224, 145, 0.75);
+    background-color: rgba(112, 224, 145, 0.08);
+}
+
+.fpv-osd-editor-frame:hover {
+    border-color: rgb(160, 255, 185);
+    background-color: rgba(112, 224, 145, 0.18);
+}
+
+.fpv-osd-editor-frame.is-dragging {
+    border-color: rgb(255, 216, 92);
+    background-color: rgba(255, 216, 92, 0.16);
+}
+
+.hidden {
+    display: none;
+}

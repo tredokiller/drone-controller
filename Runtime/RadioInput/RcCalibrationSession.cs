@@ -6,8 +6,9 @@ using UnityEngine.InputSystem.Controls;
 namespace UForce.FpvFlight.RadioInput
 {
 	// UI-free radio calibration wizard, ported from Interceptor's ControllerCalibrationSession.
-	// Steps: move each stick end to end (the first direction of motion sets inversion), circle both sticks,
-	// flip the arm switch, optionally flip the flight mode switch. Call Tick every frame and Continue or Skip per step.
+	// Steps: move each stick end to end (the first direction of motion sets inversion), circle both sticks, flip the arm
+	// switch, then the optional payload arm, detonate, camera tilt, flight mode and thermal controls, then a summary.
+	// Call Tick every frame and Continue or Skip per step. Preview reads the radio with the calibration so far.
 	public sealed class RcCalibrationSession
 	{
 		public static readonly IReadOnlyList<RcCalibrationStep> Steps = new[]
@@ -18,18 +19,24 @@ namespace UForce.FpvFlight.RadioInput
 			RcCalibrationStep.ForAxis(RcAxisChannel.Roll),
 			RcCalibrationStep.Of(RcCalibrationStepKind.Range),
 			RcCalibrationStep.ForSwitch(RcSwitchChannel.Arm, false),
+			RcCalibrationStep.ForSwitch(RcSwitchChannel.PayloadArm, true),
+			RcCalibrationStep.ForSwitch(RcSwitchChannel.PayloadDetonate, true),
+			RcCalibrationStep.ForSwitch(RcSwitchChannel.CameraTilt, true),
 			RcCalibrationStep.ForSwitch(RcSwitchChannel.FlightMode, true),
+			RcCalibrationStep.ForSwitch(RcSwitchChannel.Thermal, true),
 			RcCalibrationStep.Of(RcCalibrationStepKind.Summary)
 		};
 
 		private const int AXIS_COUNT = 4;
-		private const float CENTERED_DEADZONE = 0.02f;
+		private const float CENTERED_DEADZONE = 0.05f;
 
 		private readonly Dictionary<AxisControl, RcControlCapture> r_captures = new();
 		private readonly HashSet<AxisControl> r_boundControls = new();
 		private readonly AxisControl[] r_axisControls = new AxisControl[AXIS_COUNT];
 		private readonly RcControlCapture[] r_axisCaptures = new RcControlCapture[AXIS_COUNT];
 		private readonly RcControlCapture[] r_rangeCaptures = new RcControlCapture[AXIS_COUNT];
+		private readonly AxisControl[] r_switchControls = new AxisControl[RcSwitchChannels.COUNT];
+		private readonly RcCalibrationPreview r_preview = new();
 
 		private AxisControl _detected;
 
@@ -39,6 +46,14 @@ namespace UForce.FpvFlight.RadioInput
 			Result = baseCalibration != null ? baseCalibration.Clone() : new RcCalibration();
 		}
 
+		// Opens a saved calibration on its radio and jumps straight to the summary (review, toggle inversion, save).
+		public static RcCalibrationSession OpenExisting(RcCalibration calibration, InputDevice device)
+		{
+			var session = new RcCalibrationSession(calibration);
+			session.BindExisting(device);
+			return session;
+		}
+
 		public int StepIndex { get; private set; }
 		public RcCalibrationStep Step => Steps[StepIndex];
 		public bool IsComplete => Step.Kind == RcCalibrationStepKind.Summary;
@@ -46,6 +61,7 @@ namespace UForce.FpvFlight.RadioInput
 		public RcCalibration Result { get; }
 		public bool IsDeviceLost => Device != null && !Device.added;
 		public string DetectedName => _detected?.displayName;
+		public RcCalibrationPreview Preview => r_preview;
 
 		public bool CanContinue
 		{
@@ -107,6 +123,8 @@ namespace UForce.FpvFlight.RadioInput
 
 					break;
 			}
+
+			UpdatePreview();
 		}
 
 		public void Continue()
@@ -255,7 +273,8 @@ namespace UForce.FpvFlight.RadioInput
 
 		private void BindSwitch()
 		{
-			bool isAlwaysLatching = _detected is not ButtonControl;
+			RcSwitchChannel channel = Step.Switch;
+			bool isAlwaysLatching = RcSwitchChannels.IsStateSwitch(channel) && _detected is not ButtonControl;
 			RcSwitchCalibration calibration = RcSwitchCalibration.FromCapture(
 				r_captures[_detected],
 				_detected.ReadUnprocessedValue(),
@@ -263,7 +282,63 @@ namespace UForce.FpvFlight.RadioInput
 				isAlwaysLatching);
 
 			r_boundControls.Add(_detected);
-			Result.SetSwitch(Step.Switch, calibration);
+			r_switchControls[(int)channel] = _detected;
+			Result.SetSwitch(channel, calibration);
+		}
+
+		private void BindExisting(InputDevice device)
+		{
+			Device = device;
+			if (device != null)
+			{
+				Result.SetDevice(RcDevices.GetDeviceKey(device), device.displayName);
+				for (int index = 0; index < AXIS_COUNT; index++)
+				{
+					r_axisControls[index] = FindControl(device, Result.GetAxis((RcAxisChannel)index).ControlPath);
+				}
+
+				for (int index = 0; index < RcSwitchChannels.COUNT; index++)
+				{
+					r_switchControls[index] = FindControl(device, Result.GetSwitch((RcSwitchChannel)index).ControlPath);
+				}
+			}
+
+			StepIndex = Steps.Count - 1;
+			UpdatePreview();
+		}
+
+		private static AxisControl FindControl(InputDevice device, string controlPath) =>
+			string.IsNullOrEmpty(controlPath) ? null : device.TryGetChildControl(controlPath) as AxisControl;
+
+		private void UpdatePreview()
+		{
+			for (int index = 0; index < AXIS_COUNT; index++)
+			{
+				var channel = (RcAxisChannel)index;
+				AxisControl control = r_axisControls[index];
+				bool isBound = control != null && control.device.added;
+				float value = 0f;
+				if (isBound)
+				{
+					value = Result.GetAxis(channel).Normalize(control.ReadUnprocessedValue());
+					if (channel == RcAxisChannel.Throttle)
+					{
+						value = (value + 1f) * 0.5f;
+					}
+				}
+
+				r_preview.SetAxis(channel, value, isBound);
+			}
+
+			for (int index = 0; index < RcSwitchChannels.COUNT; index++)
+			{
+				var channel = (RcSwitchChannel)index;
+				AxisControl control = r_switchControls[index];
+				int position = control != null && control.device.added
+					? Result.GetSwitch(channel).GetPosition(control.ReadUnprocessedValue())
+					: RcAuxState.NO_POSITION;
+				r_preview.SetSwitch(channel, position);
+			}
 		}
 
 		private void Advance()

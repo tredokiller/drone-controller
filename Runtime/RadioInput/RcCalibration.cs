@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace UForce.FpvFlight.RadioInput
 {
-	// Full calibration of one radio. Defaults match a Radiomaster TX12 (EdgeTX/OpenTX, AETR, USB joystick mode):
-	// throttle z, yaw rx, pitch stick/y (inverted), roll stick/x, arm ry, flight mode slider1.
+	// Full calibration of one radio. Defaults match a Radiomaster TX12 (EdgeTX/OpenTX, AETR, USB joystick mode) set up
+	// as in Interceptor Drones: throttle z, yaw rx, pitch stick/y (inverted), roll stick/x; arm ry (SE), payload arm rz (SF),
+	// detonate button2 (SD), camera tilt slider (SC), flight mode slider1 (SB), thermal trigger (SA).
+	// Empty control paths fall back to the InputAction's joystick binding.
 	[Serializable]
 	public sealed class RcCalibration
 	{
@@ -14,11 +16,11 @@ namespace UForce.FpvFlight.RadioInput
 
 		[Header("Axes")]
 		[SerializeField] private RcAxisCalibration _throttle = new(string.Empty, -1f, -1f, 1f, false, false, 0f);
-		[SerializeField] private RcAxisCalibration _yaw = new(string.Empty, -1f, 0f, 1f, true, false, 0.02f);
-		[SerializeField] private RcAxisCalibration _pitch = new(string.Empty, -1f, 0f, 1f, true, true, 0.02f);
-		[SerializeField] private RcAxisCalibration _roll = new(string.Empty, -1f, 0f, 1f, true, false, 0.02f);
+		[SerializeField] private RcAxisCalibration _yaw = new(string.Empty, -1f, 0f, 1f, true, false, 0.05f);
+		[SerializeField] private RcAxisCalibration _pitch = new(string.Empty, -1f, 0f, 1f, true, true, 0.05f);
+		[SerializeField] private RcAxisCalibration _roll = new(string.Empty, -1f, 0f, 1f, true, false, 0.05f);
 		[Tooltip("Bottom throttle deadzone: the lowest part of the stick travel reads as 0%.")]
-		[SerializeField, Range(0f, 0.2f)] private float _throttleLowDeadzone = 0.03f;
+		[SerializeField, Range(0f, 0.2f)] private float _throttleLowDeadzone = 0.02f;
 
 		[Header("Switches")]
 		[SerializeField] private RcSwitchCalibration _arm = new(string.Empty, 1f, -1f, true);
@@ -26,8 +28,14 @@ namespace UForce.FpvFlight.RadioInput
 		[SerializeField, Range(0, 2)] private int _armActivePosition = RcSwitchCalibration.ACTIVE_POSITION;
 		[SerializeField] private RcSwitchCalibration _flightMode = new(string.Empty, -1f, 1f, true);
 		[SerializeField] private FlightMode _modeAtRest = FlightMode.Angle;
-		[SerializeField] private FlightMode _modeAtMiddle = FlightMode.Acro;
+		[SerializeField] private FlightMode _modeAtMiddle = FlightMode.Horizon;
 		[SerializeField] private FlightMode _modeAtActive = FlightMode.Acro;
+		[SerializeField] private RcSwitchCalibration _payloadArm = new(string.Empty, -1f, 1f, true);
+		[Tooltip("Payload switch position that means armed: 0 rest, 1 middle, 2 active.")]
+		[SerializeField, Range(0, 2)] private int _payloadArmActivePosition = RcSwitchCalibration.ACTIVE_POSITION;
+		[SerializeField] private RcSwitchCalibration _payloadDetonate = new(string.Empty, 0f, 1f, false);
+		[SerializeField] private RcSwitchCalibration _cameraTilt = new(string.Empty, -1f, 1f, true);
+		[SerializeField] private RcSwitchCalibration _thermal = new(string.Empty, 0f, 1f, false);
 
 		public string DeviceKey => _deviceKey;
 		public string DeviceName => _deviceName;
@@ -42,6 +50,7 @@ namespace UForce.FpvFlight.RadioInput
 		public FlightMode ModeAtRest => _modeAtRest;
 		public FlightMode ModeAtMiddle => _modeAtMiddle;
 		public FlightMode ModeAtActive => _modeAtActive;
+		public int PayloadArmActivePosition => _payloadArmActivePosition;
 
 		public RcAxisCalibration GetAxis(RcAxisChannel channel)
 		{
@@ -77,17 +86,47 @@ namespace UForce.FpvFlight.RadioInput
 			}
 		}
 
-		public RcSwitchCalibration GetSwitch(RcSwitchChannel channel) => channel == RcSwitchChannel.Arm ? _arm : _flightMode;
+		public RcSwitchCalibration GetSwitch(RcSwitchChannel channel)
+		{
+			switch (channel)
+			{
+				case RcSwitchChannel.Arm:
+					return _arm;
+				case RcSwitchChannel.FlightMode:
+					return _flightMode;
+				case RcSwitchChannel.PayloadArm:
+					return _payloadArm;
+				case RcSwitchChannel.PayloadDetonate:
+					return _payloadDetonate;
+				case RcSwitchChannel.CameraTilt:
+					return _cameraTilt;
+				default:
+					return _thermal;
+			}
+		}
 
 		public void SetSwitch(RcSwitchChannel channel, RcSwitchCalibration calibration)
 		{
-			if (channel == RcSwitchChannel.Arm)
+			switch (channel)
 			{
-				_arm = calibration;
-			}
-			else
-			{
-				_flightMode = calibration;
+				case RcSwitchChannel.Arm:
+					_arm = calibration;
+					break;
+				case RcSwitchChannel.FlightMode:
+					_flightMode = calibration;
+					break;
+				case RcSwitchChannel.PayloadArm:
+					_payloadArm = calibration;
+					break;
+				case RcSwitchChannel.PayloadDetonate:
+					_payloadDetonate = calibration;
+					break;
+				case RcSwitchChannel.CameraTilt:
+					_cameraTilt = calibration;
+					break;
+				default:
+					_thermal = calibration;
+					break;
 			}
 		}
 

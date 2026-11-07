@@ -1,0 +1,29 @@
+{
+    "name": "UForce.FpvFlight.Video.Editor",
+    "rootNamespace": "UForce.FpvFlight.Video.Editor",
+    "references": [
+        "UForce.FpvFlight",
+        "UForce.FpvFlight.Video",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UFORCE_FPV_URP"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "17.0.0",
+            "define": "UFORCE_FPV_URP"
+        }
+    ],
+    "noEngineReferences": false
+}

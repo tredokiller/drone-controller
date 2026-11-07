@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf375d21b4a475187a5ab531f7801bc, type: 3}
+  m_Name: DefaultFlightController
+  m_EditorClassIdentifier:
+  _rollPitchResponseTime: 0.03
+  _yawResponseTime: 0.04
+  _integralTime: 0.6
+  _integralLimit: 0.3
+  _angleLimit: 60
+  _angleStrength: 5
+  _horizonLevelStrength: 5
+  _horizonTransition: 0.75
+  _throttleMid: 0.5
+  _throttleExpo: 0
+  _armThrottleMax: 0.05
+  _failsafe:
+    _rxLossTimeout: 0.1
+    _failsafeDelay: 1.5
+    _stageOneThrottle: 0
+    _stageOneFixedThrottle: 0.3
+  _latencySlewRate: 1
+  _turbulenceAngularAcceleration: 900

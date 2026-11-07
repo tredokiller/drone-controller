@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f922489bb960d1245882b067fd893d56, type: 3}
+  m_Name: InterceptorSting_Type
+  m_EditorClassIdentifier: UForce.FpvFlight::UForce.FpvFlight.FpvDroneType
+  _id: sting
+  _displayName: Sting
+  _description: Interceptor, 315 km/h, light and agile.
+  _preview: {fileID: 0}
+  _airframe: {fileID: 11400000, guid: ae74b555b4314805875ea1d705c18c75, type: 2}
+  _battery: {fileID: 11400000, guid: b393b7bdafcf4e8d9e52cdc1aa31ff98, type: 2}
+  _rates: {fileID: 11400000, guid: 8a1e1f93a6024547b2ec2fadf8b505e2, type: 2}
+  _profile: {fileID: 11400000, guid: df7237c9b9354dbc8321b5b03f2b9a7a, type: 2}
+  _interceptorFlight: {fileID: 11400000, guid: c4cb018324db2f0428bae4f53afe423c, type: 2}
+  _cameraUptilts:
+  - 90
+  - 45
+  - 0
+  _cameraStartPosition: 0
+  _cameraFieldOfView: 50
+  _prefab: {fileID: 2766957848459729084, guid: 2244b0f79a2992f47b73cc07622afd67, type: 3}

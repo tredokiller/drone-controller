@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f922489bb960d1245882b067fd893d56, type: 3}
+  m_Name: InterceptorZorelitV5_Type
+  m_EditorClassIdentifier: UForce.FpvFlight::UForce.FpvFlight.FpvDroneType
+  _id: zorelit-v5
+  _displayName: Zorelit v5
+  _description: Interceptor, 416 km/h.
+  _preview: {fileID: 0}
+  _airframe: {fileID: 11400000, guid: f70e66825f1b434c889c705698edd063, type: 2}
+  _battery: {fileID: 11400000, guid: fc0c2218500943dca7f3ed8e07ff6a10, type: 2}
+  _rates: {fileID: 11400000, guid: 2c0a13f43c4946a6a8b8e6b1f8079651, type: 2}
+  _profile: {fileID: 11400000, guid: df7237c9b9354dbc8321b5b03f2b9a7a, type: 2}
+  _interceptorFlight: {fileID: 11400000, guid: 42f9685ea80053d4aac6d958d74b135e, type: 2}
+  _cameraUptilts:
+  - 90
+  - 45
+  - 0
+  _cameraStartPosition: 0
+  _cameraFieldOfView: 50
+  _prefab: {fileID: 2766957848459729084, guid: 2244b0f79a2992f47b73cc07622afd67, type: 3}

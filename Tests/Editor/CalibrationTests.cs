@@ -59,11 +59,109 @@ namespace UForce.FpvFlight.Tests
 		}
 
 		[Test]
-		public void WhenModePositionMapped_ThenDefaultsAreAngleThenAcro()
+		public void WhenModePositionMapped_ThenDefaultsAreAngleHorizonAcro()
 		{
 			RcCalibration calibration = new();
 			Assert.That(calibration.ModeAtPosition(0), Is.EqualTo(FlightMode.Angle));
+			Assert.That(calibration.ModeAtPosition(1), Is.EqualTo(FlightMode.Horizon));
 			Assert.That(calibration.ModeAtPosition(2), Is.EqualTo(FlightMode.Acro));
+		}
+
+		[TestCase(-1f, 0)]
+		[TestCase(-0.51f, 0)]
+		[TestCase(-0.49f, 1)]
+		[TestCase(0.49f, 1)]
+		[TestCase(0.51f, 2)]
+		[TestCase(1f, 2)]
+		public void WhenThreePositionSwitchRead_ThenInterceptorThresholdsApply(float raw, int position)
+		{
+			RcSwitchCalibration cameraTilt = new RcCalibration().GetSwitch(RcSwitchChannel.CameraTilt);
+			Assert.That(cameraTilt.GetPosition(raw), Is.EqualTo(position));
+		}
+
+		[Test]
+		public void WhenDefaultLayout_ThenButtonsAreMomentaryAndSwitchesLatching()
+		{
+			RcCalibration calibration = new();
+			Assert.IsTrue(calibration.GetSwitch(RcSwitchChannel.Arm).IsLatching);
+			Assert.IsTrue(calibration.GetSwitch(RcSwitchChannel.PayloadArm).IsLatching);
+			Assert.IsTrue(calibration.GetSwitch(RcSwitchChannel.CameraTilt).IsLatching);
+			Assert.IsTrue(calibration.GetSwitch(RcSwitchChannel.FlightMode).IsLatching);
+			Assert.IsFalse(calibration.GetSwitch(RcSwitchChannel.PayloadDetonate).IsLatching);
+			Assert.IsFalse(calibration.GetSwitch(RcSwitchChannel.Thermal).IsLatching);
+		}
+
+		[Test]
+		public void WhenSwitchCaptureReturnedToStart_ThenOnlyStateSwitchesStayLatching()
+		{
+			// Moved from rest (-1) to the far end and back: a button-like gesture.
+			RcControlCapture capture = new(-1f);
+			capture.Add(1f);
+			capture.Add(-1f);
+
+			RcSwitchCalibration forced = RcSwitchCalibration.FromCapture(capture, -1f, "slider", RcSwitchChannels.IsStateSwitch(RcSwitchChannel.CameraTilt));
+			RcSwitchCalibration free = RcSwitchCalibration.FromCapture(capture, -1f, "trigger", RcSwitchChannels.IsStateSwitch(RcSwitchChannel.Thermal));
+
+			Assert.IsTrue(forced.IsLatching);
+			Assert.IsFalse(free.IsLatching);
+			Assert.That(free.GetPosition(1f), Is.EqualTo(RcSwitchCalibration.ACTIVE_POSITION), "Pressed reads as active.");
+			Assert.That(free.GetPosition(-1f), Is.EqualTo(0), "Released reads as rest.");
+		}
+
+		[Test]
+		public void WhenSessionStarts_ThenOptionalStepsCanBeSkippedToSummary()
+		{
+			RcCalibrationSession session = new();
+			int armStep = -1;
+			for (int index = 0; index < RcCalibrationSession.Steps.Count; index++)
+			{
+				RcCalibrationStep step = RcCalibrationSession.Steps[index];
+				if (step.Kind == RcCalibrationStepKind.Switch && step.Switch == RcSwitchChannel.Arm)
+				{
+					armStep = index;
+				}
+				else if (step.Kind == RcCalibrationStepKind.Switch)
+				{
+					Assert.IsTrue(step.IsOptional, $"{step.Switch} must be optional.");
+				}
+			}
+
+			Assert.That(armStep, Is.GreaterThan(0));
+			Assert.IsFalse(RcCalibrationSession.Steps[armStep].IsOptional, "Arm is required.");
+			Assert.That(RcCalibrationSession.Steps[RcCalibrationSession.Steps.Count - 1].Kind, Is.EqualTo(RcCalibrationStepKind.Summary));
+
+			session.Skip();
+			Assert.That(session.StepIndex, Is.EqualTo(0), "A required step cannot be skipped.");
+		}
+
+		[Test]
+		public void WhenExistingCalibrationOpened_ThenSessionStartsAtSummary()
+		{
+			RcCalibration calibration = new();
+			calibration.SetDevice("HID|Radiomaster|TX12", "TX12");
+
+			RcCalibrationSession session = RcCalibrationSession.OpenExisting(calibration, null);
+
+			Assert.IsTrue(session.IsComplete);
+			Assert.That(session.Result.DeviceKey, Is.EqualTo("HID|Radiomaster|TX12"));
+			Assert.That(session.Preview.GetSwitchPosition(RcSwitchChannel.Arm), Is.EqualTo(RcAuxState.NO_POSITION));
+		}
+
+		[Test]
+		public void WhenModeCycled_ThenOrderIsAngleHorizonAcro()
+		{
+			Assert.That(RcInputReader.NextMode(FlightMode.Angle), Is.EqualTo(FlightMode.Horizon));
+			Assert.That(RcInputReader.NextMode(FlightMode.Horizon), Is.EqualTo(FlightMode.Acro));
+			Assert.That(RcInputReader.NextMode(FlightMode.Acro), Is.EqualTo(FlightMode.Angle));
+		}
+
+		[TestCase(0f, 0f, 1f)]
+		[TestCase(0.375f, 0f, 0.5f)]
+		[TestCase(0f, -0.75f, 0f)]
+		[TestCase(1f, 0f, 0f)]
+		public void WhenHorizonStickDeflected_ThenLevellingFades(float roll, float pitch, float expected)
+		{
+			Assert.That(FpvFlightSimulation.HorizonLevelFactor(roll, pitch, 0.75f), Is.EqualTo(expected).Within(1e-4f));
 		}
 
 		[Test]

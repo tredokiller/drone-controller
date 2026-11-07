@@ -3,12 +3,12 @@
     "maps":  [
                  {
                      "name":  "Drone",
-                     "id":  "626a5f2a-77a4-407a-b83a-a385f70c4fae",
+                     "id":  "0279f072-302d-412a-8591-f2d1afad62c6",
                      "actions":  [
                                      {
                                          "name":  "Roll",
                                          "type":  "Value",
-                                         "id":  "b2812d27-21ac-4ee9-917d-dd1764bd420d",
+                                         "id":  "bb0f6eff-9e5f-45d8-8af5-9e363c24fd17",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
@@ -17,7 +17,7 @@
                                      {
                                          "name":  "Pitch",
                                          "type":  "Value",
-                                         "id":  "8982e87c-a879-4d75-85dc-c92e9950d6ee",
+                                         "id":  "28a8afd3-f498-4479-8c4b-106aef31b0f7",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
@@ -26,7 +26,7 @@
                                      {
                                          "name":  "Yaw",
                                          "type":  "Value",
-                                         "id":  "c09b5a23-81a4-4f37-9d6d-0e030550e550",
+                                         "id":  "e611815a-5cde-4aa0-8fb0-f4ee90c6fb1c",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
@@ -35,7 +35,7 @@
                                      {
                                          "name":  "Throttle",
                                          "type":  "Value",
-                                         "id":  "c1e0adfe-bc67-44fa-ae7c-8fa7fa454d41",
+                                         "id":  "1b03071e-5df9-4f74-b27c-0afc665d37df",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
@@ -44,7 +44,7 @@
                                      {
                                          "name":  "Arm",
                                          "type":  "Value",
-                                         "id":  "816d45eb-8f75-4f7d-b2fa-2b0c60e05f40",
+                                         "id":  "2609df46-3026-4e80-95d7-094446d76f1e",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
@@ -53,17 +53,53 @@
                                      {
                                          "name":  "FlightMode",
                                          "type":  "Value",
-                                         "id":  "80196a8c-b6dc-483f-b189-3d636361da33",
+                                         "id":  "7838941a-4aea-4bbb-becd-fd8c60deccf3",
                                          "expectedControlType":  "Axis",
                                          "processors":  "",
                                          "interactions":  "",
                                          "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "PayloadArm",
+                                         "type":  "Value",
+                                         "id":  "665ea33a-8af8-4a36-80e9-7fe57d77ba58",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "PayloadDetonate",
+                                         "type":  "Button",
+                                         "id":  "a20634de-3e1d-4b40-998c-331f684b0ab5",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "CameraTilt",
+                                         "type":  "Value",
+                                         "id":  "de532850-e07b-42bb-8595-5998312ae394",
+                                         "expectedControlType":  "Axis",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
+                                     },
+                                     {
+                                         "name":  "Thermal",
+                                         "type":  "Button",
+                                         "id":  "23c35320-3bbf-489e-b585-8dce47b7a9da",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
                                      }
                                  ],
                      "bindings":  [
                                       {
                                           "name":  "",
-                                          "id":  "06cd8d03-c552-4021-b288-2b0c0b1859a3",
+                                          "id":  "9c37ac0c-0924-48da-9180-a486b234fa75",
                                           "path":  "\u003cJoystick\u003e/stick/x",
                                           "interactions":  "",
                                           "processors":  "",
@@ -74,7 +110,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "d05c087d-4713-422c-b1fc-aa78d95fed8c",
+                                          "id":  "9c73f678-627b-4637-b3a8-f5b29574cb25",
                                           "path":  "\u003cJoystick\u003e/stick/y",
                                           "interactions":  "",
                                           "processors":  "",
@@ -85,7 +121,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "3bf21d3c-fe36-442a-9be9-99a543cb54ca",
+                                          "id":  "275287c0-6c80-4b8a-bb8c-34ff282a123f",
                                           "path":  "\u003cJoystick\u003e/rx",
                                           "interactions":  "",
                                           "processors":  "",
@@ -96,7 +132,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "d6ac4061-1dc1-4bb0-be92-6cb68d9f7f5e",
+                                          "id":  "7b546627-d96f-4653-a446-b7fd31594925",
                                           "path":  "\u003cJoystick\u003e/z",
                                           "interactions":  "",
                                           "processors":  "",
@@ -107,7 +143,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "79365c21-6f32-4be5-9a05-2ed715e27d90",
+                                          "id":  "da77fb1f-a3fc-4284-afd2-46adcbdd60ac",
                                           "path":  "\u003cJoystick\u003e/ry",
                                           "interactions":  "",
                                           "processors":  "",
@@ -118,7 +154,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "bda4df7f-85eb-4cc6-b388-5ed5d1db9ed2",
+                                          "id":  "61ebc7ea-9676-4190-9a32-9c9b6174b5fc",
                                           "path":  "\u003cJoystick\u003e/slider1",
                                           "interactions":  "",
                                           "processors":  "",
@@ -129,7 +165,51 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "687c292e-431f-40d5-b919-006370e29284",
+                                          "id":  "869a1c84-e074-403b-8d75-37e5d9a2341b",
+                                          "path":  "\u003cJoystick\u003e/rz",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "PayloadArm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "0a74e63b-55d0-4c67-9e54-8a545791fb1d",
+                                          "path":  "\u003cJoystick\u003e/button2",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "PayloadDetonate",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "094ccabc-1d00-44dc-aafc-d8403d06e828",
+                                          "path":  "\u003cJoystick\u003e/slider",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "CameraTilt",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "8fe89071-acad-4496-9274-268e8bfb7437",
+                                          "path":  "\u003cJoystick\u003e/trigger",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Joystick",
+                                          "action":  "Thermal",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "d57100ec-4097-499c-9d2d-de205e1c7517",
                                           "path":  "\u003cGamepad\u003e/rightStick/x",
                                           "interactions":  "",
                                           "processors":  "",
@@ -140,7 +220,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "8d0cd72e-1fa0-4eba-938a-da5bddf29eab",
+                                          "id":  "1ee7e408-9040-4faa-bc6b-b2b1b711ef49",
                                           "path":  "\u003cGamepad\u003e/rightStick/y",
                                           "interactions":  "",
                                           "processors":  "",
@@ -151,7 +231,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "f5d98a0f-7ed4-4458-a069-3d2484000109",
+                                          "id":  "17753c76-7b92-4fe8-84ff-0dbc1fb65fb1",
                                           "path":  "\u003cGamepad\u003e/leftStick/x",
                                           "interactions":  "",
                                           "processors":  "",
@@ -162,7 +242,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "984ca381-a3c5-4a98-a489-bb8c36bd86e9",
+                                          "id":  "63fb6c0e-c2a4-48aa-93b6-24142a48a2c9",
                                           "path":  "\u003cGamepad\u003e/leftStick/y",
                                           "interactions":  "",
                                           "processors":  "",
@@ -173,7 +253,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "6958ce2c-127f-46c7-80da-6abd8b7b780f",
+                                          "id":  "a91464a5-4d90-4fa3-bad7-f2e0053ad5a6",
                                           "path":  "\u003cGamepad\u003e/buttonNorth",
                                           "interactions":  "",
                                           "processors":  "",
@@ -184,7 +264,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "58a29a7d-7096-45e6-bf29-a5b2e1f6407d",
+                                          "id":  "da83df1b-0e0a-4c4e-8c27-529f2b586862",
                                           "path":  "\u003cGamepad\u003e/buttonWest",
                                           "interactions":  "",
                                           "processors":  "",
@@ -194,8 +274,52 @@
                                           "isPartOfComposite":  false
                                       },
                                       {
+                                          "name":  "",
+                                          "id":  "c2c5506d-3e61-480d-bed2-c03c0e0b0876",
+                                          "path":  "\u003cGamepad\u003e/leftShoulder",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "PayloadArm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "730a35db-3321-4b25-84f5-da8497d7ef29",
+                                          "path":  "\u003cGamepad\u003e/rightTrigger",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "PayloadDetonate",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "ef80d3f3-bba1-4bd2-84d4-fda2b32d4f9d",
+                                          "path":  "\u003cGamepad\u003e/leftTrigger",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "CameraTilt",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "20055567-cfb4-4893-8cfa-eb1baa188708",
+                                          "path":  "\u003cGamepad\u003e/rightShoulder",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Thermal",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
                                           "name":  "1D Axis",
-                                          "id":  "a3ced223-5b8d-4776-a583-bb32074e181b",
+                                          "id":  "9c03b76d-0952-40a2-9572-db697e5078e1",
                                           "path":  "1DAxis",
                                           "interactions":  "",
                                           "processors":  "",
@@ -206,7 +330,7 @@
                                       },
                                       {
                                           "name":  "negative",
-                                          "id":  "013e9fe0-94f8-48e7-826a-8e03d9d7f104",
+                                          "id":  "4974e292-96b3-4c63-b513-40ff727a924b",
                                           "path":  "\u003cKeyboard\u003e/leftArrow",
                                           "interactions":  "",
                                           "processors":  "",
@@ -217,7 +341,7 @@
                                       },
                                       {
                                           "name":  "positive",
-                                          "id":  "7d57eef2-4624-4d20-9339-36820edd6173",
+                                          "id":  "7b04e9ab-9a22-4d2a-947e-9acd7f988b95",
                                           "path":  "\u003cKeyboard\u003e/rightArrow",
                                           "interactions":  "",
                                           "processors":  "",
@@ -228,7 +352,7 @@
                                       },
                                       {
                                           "name":  "1D Axis",
-                                          "id":  "bc892c99-7c00-4748-b610-bcf5f284614d",
+                                          "id":  "78e0dff7-e955-4398-997b-7a2d57c9527e",
                                           "path":  "1DAxis",
                                           "interactions":  "",
                                           "processors":  "",
@@ -239,7 +363,7 @@
                                       },
                                       {
                                           "name":  "negative",
-                                          "id":  "1601c067-0c4b-448d-9ded-33f3798a7bcb",
+                                          "id":  "adce3533-b4d3-40dd-a523-03743f3e7e7b",
                                           "path":  "\u003cKeyboard\u003e/downArrow",
                                           "interactions":  "",
                                           "processors":  "",
@@ -250,7 +374,7 @@
                                       },
                                       {
                                           "name":  "positive",
-                                          "id":  "424b0230-8fa9-4529-afe7-5afd3c0df859",
+                                          "id":  "d0f42cfc-026e-4d60-8ce6-9017ede868e4",
                                           "path":  "\u003cKeyboard\u003e/upArrow",
                                           "interactions":  "",
                                           "processors":  "",
@@ -261,7 +385,7 @@
                                       },
                                       {
                                           "name":  "1D Axis",
-                                          "id":  "333d0f2c-10db-4508-9fa5-29e881386228",
+                                          "id":  "aa42fc3e-425f-4c41-a512-7579c3245392",
                                           "path":  "1DAxis",
                                           "interactions":  "",
                                           "processors":  "",
@@ -272,7 +396,7 @@
                                       },
                                       {
                                           "name":  "negative",
-                                          "id":  "c0e46909-afa4-4fe6-9cf2-08f74615f993",
+                                          "id":  "1d311824-10e6-4523-83ed-8d3474d21751",
                                           "path":  "\u003cKeyboard\u003e/a",
                                           "interactions":  "",
                                           "processors":  "",
@@ -283,7 +407,7 @@
                                       },
                                       {
                                           "name":  "positive",
-                                          "id":  "62277f09-e552-4fad-ba9a-a80c977bdd54",
+                                          "id":  "2a021eff-5d97-4921-998f-8ec48090e285",
                                           "path":  "\u003cKeyboard\u003e/d",
                                           "interactions":  "",
                                           "processors":  "",
@@ -294,7 +418,7 @@
                                       },
                                       {
                                           "name":  "1D Axis",
-                                          "id":  "85beeedf-f596-4ae5-b881-64951e9ed057",
+                                          "id":  "bcfef568-cd7b-405c-be09-bab4ad6f3a85",
                                           "path":  "1DAxis",
                                           "interactions":  "",
                                           "processors":  "",
@@ -305,7 +429,7 @@
                                       },
                                       {
                                           "name":  "negative",
-                                          "id":  "5bb98378-15b9-4dc7-a8fa-e46ae5863f10",
+                                          "id":  "fc6de61b-bdfc-4f93-a6a8-78f847621b73",
                                           "path":  "\u003cKeyboard\u003e/s",
                                           "interactions":  "",
                                           "processors":  "",
@@ -316,7 +440,7 @@
                                       },
                                       {
                                           "name":  "positive",
-                                          "id":  "6670fd66-f9b4-4a1f-9415-2432a06be99e",
+                                          "id":  "24127874-2be1-47e0-8b84-c6e7475a4d7f",
                                           "path":  "\u003cKeyboard\u003e/w",
                                           "interactions":  "",
                                           "processors":  "",
@@ -327,7 +451,7 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "e45eab44-f552-4008-869d-f6c18e4e267d",
+                                          "id":  "7ee45fa2-f94b-4caf-be9f-28adf98ac73b",
                                           "path":  "\u003cKeyboard\u003e/x",
                                           "interactions":  "",
                                           "processors":  "",
@@ -338,12 +462,56 @@
                                       },
                                       {
                                           "name":  "",
-                                          "id":  "491610eb-5ce0-4684-9dbc-80526ccaa267",
+                                          "id":  "699d3aa4-5e5f-45dd-8de4-4dee0edf63a8",
                                           "path":  "\u003cKeyboard\u003e/m",
                                           "interactions":  "",
                                           "processors":  "",
                                           "groups":  "Keyboard\u0026Mouse",
                                           "action":  "FlightMode",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "606a6b10-e11d-4e27-a3a5-6bb0f9593cc2",
+                                          "path":  "\u003cKeyboard\u003e/b",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "PayloadArm",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "ddb3d8de-f69e-433f-b824-1d97bb90111c",
+                                          "path":  "\u003cKeyboard\u003e/g",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "PayloadDetonate",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "891ec8b9-49ff-4f5d-84d7-274278535fef",
+                                          "path":  "\u003cKeyboard\u003e/v",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "CameraTilt",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "b32ce699-eb28-483b-a535-89ba80f364eb",
+                                          "path":  "\u003cKeyboard\u003e/t",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Thermal",
                                           "isComposite":  false,
                                           "isPartOfComposite":  false
                                       }

@@ -158,6 +158,45 @@ namespace UForce.FpvFlight.Tests
 			Assert.That(result.AngularAcceleration.magnitude, Is.EqualTo(0f).Within(1e-4f));
 		}
 
+		[TestCase(ArmingInhibit.PayloadArmed, ArmingBlockReason.PayloadArmed)]
+		[TestCase(ArmingInhibit.Crashed, ArmingBlockReason.Crashed)]
+		[TestCase(ArmingInhibit.External, ArmingBlockReason.External)]
+		public void WhenArmingInhibited_ThenSwitchDoesNotArmUntilClearedAndCycled(ArmingInhibit inhibit, ArmingBlockReason reason)
+		{
+			_simulation.SetArmingInhibit(inhibit, true);
+			Run(Command(0f, false), 0.1f);
+			Run(Command(0f, true), 0.1f);
+			Assert.IsFalse(_simulation.IsArmed);
+			Assert.IsTrue((_simulation.Telemetry.ArmingBlockReason & reason) != 0);
+
+			_simulation.SetArmingInhibit(inhibit, false);
+			Run(Command(0f, true), 0.1f);
+			Assert.IsFalse(_simulation.IsArmed, "Clearing the inhibit with the switch still on must not arm.");
+
+			Run(Command(0f, false), 0.1f);
+			Run(Command(0f, true), 0.1f);
+			Assert.IsTrue(_simulation.IsArmed);
+		}
+
+		[Test]
+		public void WhenInhibitSetWhileArmed_ThenDroneStaysArmed()
+		{
+			Arm();
+			_simulation.SetArmingInhibit(ArmingInhibit.PayloadArmed, true);
+			Run(Command(0.3f, true), 0.2f);
+			Assert.IsTrue(_simulation.IsArmed, "An inhibit only blocks arming; it does not disarm in flight.");
+		}
+
+		[Test]
+		public void WhenBatteryAtOnePercent_ThenArmingIsBlocked()
+		{
+			_simulation.SetBattery(_assets.Battery, 0.01f);
+			Run(Command(0f, false), 0.1f);
+			Run(Command(0f, true), 0.1f);
+			Assert.IsFalse(_simulation.IsArmed);
+			Assert.IsTrue((_simulation.Telemetry.ArmingBlockReason & ArmingBlockReason.BatteryEmpty) != 0);
+		}
+
 		[Test]
 		public void WhenArmedAtZeroThrottle_ThenMotorsIdle()
 		{

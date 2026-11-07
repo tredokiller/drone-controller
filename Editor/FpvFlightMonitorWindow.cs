@@ -205,8 +205,15 @@ namespace UForce.FpvFlight.Editor
 				}
 			}
 
-			EditorGUILayout.LabelField("Arm", string.IsNullOrEmpty(result.ArmSwitch.ControlPath) ? "not set" : result.ArmSwitch.ControlPath);
-			EditorGUILayout.LabelField("Flight mode", string.IsNullOrEmpty(result.FlightModeSwitch.ControlPath) ? "not set" : result.FlightModeSwitch.ControlPath);
+			for (int index = 0; index < RcSwitchChannels.COUNT; index++)
+			{
+				var channel = (RcSwitchChannel)index;
+				RcSwitchCalibration calibration = result.GetSwitch(channel);
+				int position = _session.Preview.GetSwitchPosition(channel);
+				string state = position == RcAuxState.NO_POSITION ? string.Empty : $"  position {position}";
+				string kind = calibration.IsLatching ? "switch" : "button";
+				EditorGUILayout.LabelField(channel.ToString(), string.IsNullOrEmpty(calibration.ControlPath) ? "not set" : $"{calibration.ControlPath} ({kind}){state}");
+			}
 
 			if (GUILayout.Button("Save for this radio (PlayerPrefs)"))
 			{
@@ -245,9 +252,21 @@ namespace UForce.FpvFlight.Editor
 				case RcCalibrationStepKind.Range:
 					return "Circle both sticks along their full travel a few times.";
 				case RcCalibrationStepKind.Switch:
-					return step.Switch == RcSwitchChannel.Arm
-						? "Arm switch: flip it to the ARMED position and leave it there."
-						: "Flight mode switch (optional): flip it to the ACRO position and leave it there.";
+					switch (step.Switch)
+					{
+						case RcSwitchChannel.Arm:
+							return "Arm switch (SE): flip it to the ARMED position and leave it there.";
+						case RcSwitchChannel.PayloadArm:
+							return "Payload arm switch (SF, optional): flip it to the ARMED position and leave it there.";
+						case RcSwitchChannel.PayloadDetonate:
+							return "Detonate button (SD, optional): press it and let it go.";
+						case RcSwitchChannel.CameraTilt:
+							return "Camera tilt switch (SC, optional): leave it where the camera should look along the body (90°). The middle is 45°, the other end 0°.";
+						case RcSwitchChannel.FlightMode:
+							return "Flight mode switch (SB, optional): flip it to the ACRO position and leave it there. The middle is HORIZON, the other end ANGLE.";
+						default:
+							return "Thermal button (SA, optional): press it and let it go.";
+					}
 				default:
 					return "Done. Check the result, then save it for this radio or write it into a profile asset.";
 			}

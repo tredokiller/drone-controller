@@ -4,6 +4,9 @@
     "references": [
         "UForce.FpvFlight",
         "UForce.FpvFlight.RadioInput",
+        "UForce.FpvFlight.Video",
+        "UForce.FpvFlight.Osd",
+        "UForce.FpvFlight.Osd.UI",
         "Unity.InputSystem"
     ],
     "includePlatforms": [],
@@ -13,6 +16,17 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "17.0.0",
+            "define": "UFORCE_FPV_URP"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "2.0.0",
+            "define": "UFORCE_FPV_UGUI"
+        }
+    ],
     "noEngineReferences": false
 }

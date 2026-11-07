@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f922489bb960d1245882b067fd893d56, type: 3}
+  m_Name: InterceptorSpys_Type
+  m_EditorClassIdentifier: UForce.FpvFlight::UForce.FpvFlight.FpvDroneType
+  _id: spys
+  _displayName: SPYS
+  _description: Interceptor, 450 km/h, the fastest.
+  _preview: {fileID: 0}
+  _airframe: {fileID: 11400000, guid: 9c0b96d3856544ff99b8a19fb52fe661, type: 2}
+  _battery: {fileID: 11400000, guid: b1bc359610e24087b5c137b486ef7fcf, type: 2}
+  _rates: {fileID: 11400000, guid: c9f01d8d90f04ef4b3529571c9842635, type: 2}
+  _profile: {fileID: 11400000, guid: df7237c9b9354dbc8321b5b03f2b9a7a, type: 2}
+  _interceptorFlight: {fileID: 11400000, guid: 75afc569325bf734e930bfcad1540941, type: 2}
+  _cameraUptilts:
+  - 90
+  - 45
+  - 0
+  _cameraStartPosition: 0
+  _cameraFieldOfView: 50
+  _prefab: {fileID: 2766957848459729084, guid: 2244b0f79a2992f47b73cc07622afd67, type: 3}

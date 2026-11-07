@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f922489bb960d1245882b067fd893d56, type: 3}
+  m_Name: StrikeFpv_Type
+  m_EditorClassIdentifier: UForce.FpvFlight::UForce.FpvFlight.FpvDroneType
+  _id: strike-fpv
+  _displayName: Strike FPV
+  _description: "7\" strike FPV drone carrying a warhead. Fixed 25\xB0 camera uptilt."
+  _preview: {fileID: 0}
+  _airframe: {fileID: 11400000, guid: 4e8c523882974fcba6a8fed5fc88075b, type: 2}
+  _battery: {fileID: 11400000, guid: b61acd8d2199436d9da85ef5e3d1cc8c, type: 2}
+  _rates: {fileID: 11400000, guid: cc7959bafae14f74962fefee14992a56, type: 2}
+  _profile: {fileID: 11400000, guid: df7237c9b9354dbc8321b5b03f2b9a7a, type: 2}
+  _interceptorFlight: {fileID: 0}
+  _cameraUptilts:
+  - 25
+  _cameraStartPosition: 0
+  _cameraFieldOfView: 90
+  _prefab: {fileID: 3335469000692975816, guid: 106e2a8a6ab66114880d5341b02d2f1e, type: 3}

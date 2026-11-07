@@ -1,0 +1,28 @@
+{
+    "name": "UForce.FpvFlight.RotorWash.GeoWorld",
+    "rootNamespace": "UForce.FpvFlight.RotorWash.GeoWorld",
+    "references": [
+        "UForce.FpvFlight",
+        "UForce.FpvFlight.RotorWash",
+        "GeoWorld.Environment",
+        "GeoWorld.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UFORCE_FPV_GEOWORLD",
+        "ENVIRO_3"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.tredokiller.geoworld",
+            "expression": "1.20.0",
+            "define": "UFORCE_FPV_GEOWORLD"
+        }
+    ],
+    "noEngineReferences": false
+}

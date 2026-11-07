@@ -1,0 +1,32 @@
+{
+    "name": "UForce.FpvFlight.Osd.UI",
+    "rootNamespace": "UForce.FpvFlight.Osd.UI",
+    "references": [
+        "UForce.FpvFlight.Osd",
+        "UnityEngine.UI",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UFORCE_FPV_URP",
+        "UFORCE_FPV_UGUI"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "17.0.0",
+            "define": "UFORCE_FPV_URP"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "2.0.0",
+            "define": "UFORCE_FPV_UGUI"
+        }
+    ],
+    "noEngineReferences": false
+}

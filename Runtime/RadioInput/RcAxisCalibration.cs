@@ -18,7 +18,7 @@ namespace UForce.FpvFlight.RadioInput
 		[SerializeField] private bool _isCentered = true;
 		[SerializeField] private bool _isInverted;
 		[Tooltip("Deadzone around center for centered axes, in normalized units.")]
-		[SerializeField, Range(0f, 0.2f)] private float _deadzone = 0.02f;
+		[SerializeField, Range(0f, 0.2f)] private float _deadzone = 0.05f;
 
 		public RcAxisCalibration()
 		{

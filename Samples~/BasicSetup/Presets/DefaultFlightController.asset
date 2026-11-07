@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf375d21b4a475187a5ab531f7801bc, type: 3}
   m_Name: DefaultFlightController
   m_EditorClassIdentifier:
-  _rollPitchResponseTime: 0.04
-  _yawResponseTime: 0.06
+  _rollPitchResponseTime: 0.03
+  _yawResponseTime: 0.04
   _integralTime: 0.6
   _integralLimit: 0.3
   _angleLimit: 60
   _angleStrength: 5
+  _horizonLevelStrength: 5
+  _horizonTransition: 0.75
   _throttleMid: 0.5
   _throttleExpo: 0
   _armThrottleMax: 0.05

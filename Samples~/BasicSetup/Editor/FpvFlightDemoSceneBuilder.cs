@@ -1,25 +1,37 @@
-using UForce.FpvFlight.Airframe;
-using UForce.FpvFlight.Control;
 using UForce.FpvFlight.RadioInput;
-using UForce.FpvFlight.Rates;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+#if UFORCE_FPV_URP && UFORCE_FPV_UGUI
+using UForce.FpvFlight.Video;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+#endif
 
 namespace UForce.FpvFlight.Samples.Editor
 {
-	// Builds a flyable demo scene next to this sample: ground, obstacles and a drone with an uptilted FPV camera.
+	// Builds a flyable demo scene next to this sample: ground, obstacles, a spawn point and the demo driver with the five
+	// drone types (strike FPV and the Interceptor Drones interceptors). The drone prefabs carry their own camera, FPV video,
+	// OSD, sound and rotor wash. With URP the video renderer feature is added to the project's URP renderers.
 	public static class FpvFlightDemoSceneBuilder
 	{
-		private const float CAMERA_UPTILT = 25f;
+		private const string TYPES_PATH = "Packages/com.uforce.fpv-flight/Runtime/DroneTypes";
+		private static readonly string[] r_typeFolders = { "StrikeFpv", "InterceptorP1Sun", "InterceptorSting", "InterceptorZorelitV5", "InterceptorSpys" };
 
 		[MenuItem("Tools/UForce/FPV Flight/Build Demo Scene")]
 		public static void Build()
 		{
 			string folder = GetSampleFolder();
 			Scene scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+
+#if UFORCE_FPV_URP && UFORCE_FPV_UGUI
+			EnsureVideoFeature();
+			EnsureTextMeshProEssentials();
+#else
+			Debug.LogWarning($"[{nameof(FpvFlightDemoSceneBuilder)}] URP or uGUI is missing: the drones have no FPV video and no OSD.");
+#endif
 
 			GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
 			ground.name = "Ground";
@@ -36,59 +48,120 @@ namespace UForce.FpvFlight.Samples.Editor
 				obstacle.transform.localScale = new Vector3(3f, height, 3f);
 			}
 
-			GameObject drone = CreateDrone(folder);
 			Camera main = Camera.main;
 			if (main)
 			{
 				Object.DestroyImmediate(main.gameObject);
 			}
 
-			GameObject cameraObject = new("FPV Camera", typeof(Camera), typeof(AudioListener));
-			cameraObject.tag = "MainCamera";
-			cameraObject.transform.SetParent(drone.transform, false);
-			cameraObject.transform.localPosition = new Vector3(0f, 0.05f, 0.12f);
-			cameraObject.transform.localRotation = Quaternion.Euler(-CAMERA_UPTILT, 0f, 0f);
-			var fpvCamera = cameraObject.GetComponent<Camera>();
-			fpvCamera.fieldOfView = 90f;
-			fpvCamera.nearClipPlane = 0.05f;
+			var spawn = new GameObject("Spawn Point").transform;
+			spawn.position = new Vector3(0f, 0.5f, 0f);
+
+			var demo = new GameObject("FPV Demo");
+			var driver = demo.AddComponent<FpvFlightDemoDriver>();
+			SetReference(driver, "_actions", Load<InputActionAsset>($"{folder}/FpvDemoInputActions.inputactions"));
+			SetReference(driver, "_calibration", Load<RcCalibrationProfile>($"{folder}/Presets/DefaultRcCalibration.asset"));
+			SetReference(driver, "_spawnPoint", spawn);
+
+			var serialized = new SerializedObject(driver);
+			SerializedProperty types = serialized.FindProperty("_types");
+			types.arraySize = r_typeFolders.Length;
+			for (int index = 0; index < r_typeFolders.Length; index++)
+			{
+				string typeFolder = r_typeFolders[index];
+				var type = Load<FpvDroneType>($"{TYPES_PATH}/{typeFolder}/{typeFolder}_Type.asset");
+				if (type == null)
+				{
+					Debug.LogError($"[{nameof(FpvFlightDemoSceneBuilder)}] Drone type {typeFolder} is missing: run Tools > UForce > FPV Flight > Build Drone Types.");
+				}
+
+				types.GetArrayElementAtIndex(index).objectReferenceValue = type;
+			}
+
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+
+			var overlay = demo.AddComponent<FpvTelemetryOverlay>();
+			SetReference(overlay, "_driver", driver);
 
 			string path = $"{folder}/FpvFlightDemo.unity";
 			EditorSceneManager.SaveScene(scene, path);
 			Debug.Log($"[{nameof(FpvFlightDemoSceneBuilder)}] Saved {path}.");
 		}
 
-		private static GameObject CreateDrone(string folder)
+#if UFORCE_FPV_URP && UFORCE_FPV_UGUI
+		// Adds FpvVideoRendererFeature to every URP renderer the project's pipeline assets use, as the renderer inspector does.
+		private static void EnsureVideoFeature()
 		{
-			GameObject drone = new("FPV Drone");
-			drone.transform.position = new Vector3(0f, 0.2f, 0f);
-			var collider = drone.AddComponent<BoxCollider>();
-			collider.size = new Vector3(0.32f, 0.1f, 0.32f);
+			var pipelines = new System.Collections.Generic.HashSet<UniversalRenderPipelineAsset>();
+			if (GraphicsSettings.defaultRenderPipeline is UniversalRenderPipelineAsset defaultPipeline)
+			{
+				pipelines.Add(defaultPipeline);
+			}
 
-			GameObject frame = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			frame.name = "Frame";
-			Object.DestroyImmediate(frame.GetComponent<BoxCollider>());
-			frame.transform.SetParent(drone.transform, false);
-			frame.transform.localScale = new Vector3(0.32f, 0.06f, 0.32f);
+			for (int level = 0; level < QualitySettings.count; level++)
+			{
+				if (QualitySettings.GetRenderPipelineAssetAt(level) is UniversalRenderPipelineAsset levelPipeline)
+				{
+					pipelines.Add(levelPipeline);
+				}
+			}
 
-			var body = drone.AddComponent<Rigidbody>();
-			body.interpolation = RigidbodyInterpolation.Interpolate;
-			body.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+			foreach (UniversalRenderPipelineAsset pipeline in pipelines)
+			{
+				SerializedProperty renderers = new SerializedObject(pipeline).FindProperty("m_RendererDataList");
+				for (int index = 0; renderers != null && index < renderers.arraySize; index++)
+				{
+					if (renderers.GetArrayElementAtIndex(index).objectReferenceValue is ScriptableRendererData renderer)
+					{
+						AddVideoFeature(renderer);
+					}
+				}
+			}
 
-			var controller = drone.AddComponent<FpvFlightController>();
-			SetReference(controller, "_airframe", Load<AirframeDefinition>(folder, "Presets/DefaultAirframe.asset"));
-			SetReference(controller, "_battery", Load<BatteryDefinition>(folder, "Presets/DefaultBattery.asset"));
-			SetReference(controller, "_rates", Load<RatesProfile>(folder, "Presets/BetaflightDefaultRates.asset"));
-			SetReference(controller, "_profile", Load<FlightControllerProfile>(folder, "Presets/DefaultFlightController.asset"));
-
-			var driver = drone.AddComponent<FpvFlightDemoDriver>();
-			SetReference(driver, "_actions", Load<InputActionAsset>(folder, "FpvDemoInputActions.inputactions"));
-			SetReference(driver, "_calibration", Load<RcCalibrationProfile>(folder, "Presets/DefaultRcCalibration.asset"));
-
-			var overlay = drone.AddComponent<FpvTelemetryOverlay>();
-			SetReference(overlay, "_controller", controller);
-			SetReference(overlay, "_driver", driver);
-			return drone;
+			AssetDatabase.SaveAssets();
 		}
+
+		private static void AddVideoFeature(ScriptableRendererData renderer)
+		{
+			foreach (ScriptableRendererFeature existing in renderer.rendererFeatures)
+			{
+				if (existing is FpvVideoRendererFeature)
+				{
+					return;
+				}
+			}
+
+			var feature = ScriptableObject.CreateInstance<FpvVideoRendererFeature>();
+			feature.name = "FpvVideo";
+			AssetDatabase.AddObjectToAsset(feature, renderer);
+			AssetDatabase.TryGetGUIDAndLocalFileIdentifier(feature, out string _, out long localId);
+
+			var serialized = new SerializedObject(renderer);
+			SerializedProperty features = serialized.FindProperty("m_RendererFeatures");
+			SerializedProperty map = serialized.FindProperty("m_RendererFeatureMap");
+			features.arraySize++;
+			features.GetArrayElementAtIndex(features.arraySize - 1).objectReferenceValue = feature;
+			map.arraySize++;
+			map.GetArrayElementAtIndex(map.arraySize - 1).longValue = localId;
+			serialized.ApplyModifiedPropertiesWithoutUndo();
+
+			renderer.SetDirty();
+			EditorUtility.SetDirty(renderer);
+			Debug.Log($"[{nameof(FpvFlightDemoSceneBuilder)}] Added the FPV video feature to {AssetDatabase.GetAssetPath(renderer)}.");
+		}
+
+		// The OSD fonts use the TextMesh Pro SDF shader from TMP Essential Resources.
+		private static void EnsureTextMeshProEssentials()
+		{
+			if (AssetDatabase.FindAssets("t:TMP_Settings").Length > 0)
+			{
+				return;
+			}
+
+			Debug.Log($"[{nameof(FpvFlightDemoSceneBuilder)}] Importing TMP Essential Resources for the OSD fonts.");
+			TMPro.TMP_PackageResourceImporter.ImportResources(true, false, false);
+		}
+#endif
 
 		private static string GetSampleFolder()
 		{
@@ -102,7 +175,7 @@ namespace UForce.FpvFlight.Samples.Editor
 			return path.Substring(0, path.LastIndexOf('/'));
 		}
 
-		private static T Load<T>(string folder, string relativePath) where T : Object => AssetDatabase.LoadAssetAtPath<T>($"{folder}/{relativePath}");
+		private static T Load<T>(string path) where T : Object => AssetDatabase.LoadAssetAtPath<T>(path);
 
 		private static void SetReference(Object target, string property, Object value)
 		{

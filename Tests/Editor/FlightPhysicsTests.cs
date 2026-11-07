@@ -115,6 +115,37 @@ namespace UForce.FpvFlight.Tests
 		}
 
 		[Test]
+		public void WhenHorizonAtCentreStick_ThenDroneLevels()
+		{
+			CreateDrone();
+			ArmAtThrottle(0.3f);
+			_body.rotation = Quaternion.Euler(35f, 20f, -30f);
+			_body.angularVelocity = Vector3.zero;
+
+			Run(new RcCommand(0f, 0f, 0f, 0.3f, true, FlightMode.Horizon), 1.5f);
+
+			Assert.That(_controller.Telemetry.TiltAngle, Is.LessThan(5f));
+		}
+
+		[Test]
+		public void WhenHorizonFullRollStick_ThenFlipCompletes()
+		{
+			CreateDrone();
+			ArmAtThrottle(0.3f);
+
+			float rolled = 0f;
+			int guard = 0;
+			while (rolled < 360f && guard++ < 200)
+			{
+				Step(new RcCommand(1f, 0f, 0f, 0.3f, true, FlightMode.Horizon));
+				rolled += MeasuredRollRate() * DELTA_TIME;
+			}
+
+			Assert.That(rolled, Is.GreaterThanOrEqualTo(360f), "Full stick in horizon must give acro rates.");
+			Assert.That(guard, Is.LessThan(100));
+		}
+
+		[Test]
 		public void WhenSwitchedToAngleWhileInverted_ThenDroneLevels()
 		{
 			CreateDrone();

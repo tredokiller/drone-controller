@@ -1,0 +1,16 @@
+{
+    "name": "UForce.FpvFlight.Audio",
+    "rootNamespace": "UForce.FpvFlight.Audio",
+    "references": [
+        "UForce.FpvFlight"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
